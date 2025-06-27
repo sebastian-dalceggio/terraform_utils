@@ -1,0 +1,17 @@
+[project]
+name = "terraform-utils"
+version = "0.1.0"
+description = "Terraform utils package"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = []
+
+[dependency-groups]
+dev = [
+    "mypy>=1.16.1",
+    "pdbpp>=0.11.6",
+    "pre-commit>=4.2.0",
+    "pytest>=8.4.1",
+    "pytest-mock>=3.14.1",
+    "ruff>=0.12.1",
+]
