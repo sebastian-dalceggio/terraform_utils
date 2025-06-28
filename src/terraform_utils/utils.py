@@ -31,7 +31,11 @@ def get_terraform_output(output_name: str, cwd: str | Path | None = None) -> Any
     """
     try:
         result = subprocess.run(
-            ["terraform", "output", "-json"], capture_output=True, text=True, check=True, cwd=cwd
+            ["terraform", "output", "-json"],
+            capture_output=True,
+            text=True,
+            check=True,
+            cwd=cwd,
         )
 
         outputs = json.loads(result.stdout)
