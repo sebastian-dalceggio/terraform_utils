@@ -6,9 +6,10 @@ output values from Terraform state.
 from typing import Any
 import subprocess
 import json
+from pathlib import Path
 
 
-def get_terraform_output(output_name: str) -> Any:
+def get_terraform_output(output_name: str, cwd: str | Path | None = None) -> Any:
     """Retrieves a specific output value from Terraform's state.
 
     This function executes the 'terraform output -json' command, parses its JSON
@@ -19,6 +20,7 @@ def get_terraform_output(output_name: str) -> Any:
 
     Args:
         output_name: The name of the Terraform output to retrieve.
+        cwd: Terraform directory
 
     Returns:
         The value of the specified Terraform output if found. The type of the
@@ -29,7 +31,11 @@ def get_terraform_output(output_name: str) -> Any:
     """
     try:
         result = subprocess.run(
-            ["terraform", "output", "-json"], capture_output=True, text=True, check=True
+            ["terraform", "output", "-json"],
+            capture_output=True,
+            text=True,
+            check=True,
+            cwd=cwd,
         )
 
         outputs = json.loads(result.stdout)
